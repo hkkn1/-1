@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英単語テスト 動詞 Section 1 </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    #container {
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #question {
+      margin-bottom: 10px;
+    }
+
+    #answer-area {
+      display: flex;
+      justify-content: center;
+    }
+
+    #answer {
+      width: 50%;
+      padding: 5px;
+    }
+
+    #result {
+      font-weight: bold;
+      color: #000;
+      display: none;
+    }
+
+    #buttons {
+      margin-top: 10px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #check-answer {
+      display: block;
+    }
+
+    #next-question {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>英単語テスト 動詞 Section 1</h1>
+    <p id="question"></p>
+    <div id="answer-area">
+      <input type="text" id="answer">
+    </div>
+    <p id="result"></p>
+    <div id="buttons">
+      <button id="check-answer">答えを確認</button>
+      <button id="next-question">次の問題へ</button>
+    </div>
+  </div>
+  <script>
+    const questions = [
+  {
+    "question": "change",
+    "answer": "変える"
+  },{ 
+    "question": "learn",
+    "answer": "学ぶ"
+  },{
+    "question": "help",
+    "answer": "手伝う、助ける"
+  },{
+    "question": "need",
+    "answer": "必要とする"
+  },{
+    "question": "live",
+    "answer": "住んでいる"
+  },{
+    "question": "ask",
+    "answer": "頼む"
+  },{
+    "question": "enjoy",
+    "answer": "楽しむ"
+  },{
+    "question": "wait",
+    "answer": "待つ"
+  },{
+    "question": "cook",
+    "answer": "調理する"
+  },{
+    "question": "talk",
+    "answer": "話す"
+  },{
+    "question": "speak",
+    "answer": "話す"
+  },{
+    "question": "meet",
+    "answer": "会う"
+  },{
+    "question": "mean",
+    "answer": "指して言う"
+  },{
+    "question": "buy",
+    "answer": "買う"
+  },{
+    "question": "travel",
+    "answer": "旅行する"
+  },{
+    "question": "build",
+    "answer": "建てる"
+  },{
+    "question": "close",   
+    "answer": "閉じる"
+  },{
+    "question": "stay",
+    "answer": "滞在する"
+  },{
+    "question": "move",
+    "answer": "動かす"
+  },{
+    "question": "plan",
+    "answer": "計画する"
+  },{
+    "question": "write",
+    "answer": "書く"
+  },{
+    "question": "listen",
+    "answer": "聞く"
+  },{
+    "question": "happen",
+    "answer": "起こる、生じる"
+  },{
+    "question": "lose",
+    "answer": "失う、なくす"
+  },{
+    "question": "stand",
+    "answer": "立つ、立っている"
+  },{
+    "question": "grow",
+    "answer": "育つ"
+  },{
+    "question": "sound",
+    "answer": "聞こえる"
+  },{
+    "question": "rain",
+    "answer": "雨が降る"
+  },{
+    "question": "worry",
+    "answer": "心配する"
+  },{
+    "question": "teach",
+    "answer": "(を)教える"
+  },{
+    "question": "hope",
+    "answer": "を望む、期待する"
+  },{
+    "question": "hold",
+    "answer": "(を)持つ"
+  }
+]
+
+  ;
+    const questionElement = document.getElementById("question");
+    const answerElement = document.getElementById("answer");
+    const resultElement = document.getElementById("result");
+    const checkAnswerButton = document.getElementById("check-answer");
+    const nextQuestionButton = document.getElementById("next-question");
+
+    let usedQuestionIndexes = [];
+
+    function showQuestion() {
+      if (usedQuestionIndexes.length === questions.length) {
+        alert("テスト終了");
+        return;
+      }
+
+      let questionIndex;
+      do {
+        questionIndex = Math.floor(Math.random() * questions.length);
+      } while (usedQuestionIndexes.includes(questionIndex));
+
+      usedQuestionIndexes.push(questionIndex);
+
+      const question = questions[questionIndex];
+      questionElement.textContent = question.question;
+      answerElement.value = "";
+      resultElement.style.display = "none";
+      checkAnswerButton.style.display = "block";
+      nextQuestionButton.style.display = "none";
+    }
+
+    function checkAnswer() {
+      const correctAnswer = questions[usedQuestionIndexes[usedQuestionIndexes.length - 1]].answer;
+      resultElement.textContent = "正解は「" + correctAnswer + "」";
+      resultElement.style.display = "block";
+      checkAnswerButton.style.display = "none";
+      nextQuestionButton.style.display = "block";
+    }
+
+    function nextQuestion() {
+      showQuestion();
+    }
+
+    showQuestion();
+
+    checkAnswerButton.addEventListener("click", checkAnswer);
+    nextQuestionButton.addEventListener("click", nextQuestion);
+  </script>
+</body>
+</html>
